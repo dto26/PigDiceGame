@@ -31,21 +31,32 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         // 1) Random number
         let dice = Math.floor(Math.random() * 6) + 1;
 
-        // 2) Display the result
+        // 2) Check/update round score
+        if (dice === 1) {
+            nextPlayer()
+        }
+        else {
+            // Add score
+            roundScore += dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        }
+
+        // 3) Display the result
         let diceDOM = document.querySelector('.dice');
         diceDOM.style.display = 'block';
         diceDOM.src = 'assets/dice-' + dice + '.png';
 
-        // 3) Update the round score IF the rolled number was NOT a 1
-        if (dice !== 1) {
-            // Add score
-            roundScore += dice;
-            document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        } else {
-            // Next player
-            nextPlayer();
-        }
-
+        animate(
+            function* generator() {
+                for (let i = 0; i < 10; i++) {
+                    console.log('Generator step ' + i)
+                    yield;
+                }
+            }, 
+            function callback() {
+                console.log('Callback called')
+            }
+        )
     }
 });
 
@@ -155,3 +166,15 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
     document.querySelector('.btn-hold').classList.toggle('neumorphic--pressed')
   }, 200);
 });
+
+
+// Animation helper
+function animate(generator, callback) {
+    let routine = generator();
+    let animFrame = function() {
+        let n = routine.next()
+        if (n.done) { callback() }
+        else { requestAnimationFrame(animFrame) }
+    }
+    requestAnimationFrame(animFrame)
+}
