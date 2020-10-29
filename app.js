@@ -46,15 +46,17 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDOM.style.display = 'block';
         diceDOM.src = 'assets/dice-' + dice + '.png';
 
+        // Disable button
+        document.querySelector('.btn-roll').disabled = true
         animate(
             function* generator() {
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 100; i++) {
                     console.log('Generator step ' + i)
                     yield;
                 }
             }, 
             function callback() {
-                console.log('Callback called')
+                document.querySelector('.btn-roll').disabled = false
             }
         )
     }
