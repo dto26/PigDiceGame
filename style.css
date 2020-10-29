@@ -179,33 +179,3 @@ i {
     inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
     inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
 }
-
-.variation2 {
-  justify-content: space-around;
-  align-items: center;
-}
-
-.variation2 span {
-  display: block;
-  padding-bottom: 1.5rem;
-  position: relative;
-  font-size: 3rem;
-}
-
-.variation2 span::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: block;
-  height: 0.3rem;
-  border-radius: 1rem;
-  width: 50%;
-  margin: 0 auto;
-  background-color: currentColor;
-}
-
-.variation2.pressed {
-  color: #5ab9ea;
-}
