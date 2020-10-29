@@ -41,22 +41,27 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         }
 
-        // 3) Display the result
+        // 2.9) Get dice dom
         let diceDOM = document.querySelector('.dice');
-        diceDOM.style.display = 'block';
-        diceDOM.src = 'assets/dice-' + dice + '.png';
 
-        // Disable button
+        // 3) Do animation.. the anticipation is building!
+        let r = 15 // Animation rate
         document.querySelector('.btn-roll').disabled = true
+        diceDOM.style.transform = 'translateX(-50%) rotate(-360deg)'
         animate(
             function* generator() {
-                for (let i = 0; i < 100; i++) {
-                    console.log('Generator step ' + i)
+                for (let a = 0; a <= 360; a += r) {
+                    diceDOM.style.transform = 'translateX(-50%) rotate(-' + (360 - a) + 'deg)'
                     yield;
                 }
             }, 
             function callback() {
+                // Reenable button
                 document.querySelector('.btn-roll').disabled = false
+
+                // 4) Display the result
+                diceDOM.style.display = 'block';
+                diceDOM.src = 'assets/dice-' + dice + '.png';
             }
         )
     }
