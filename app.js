@@ -28,30 +28,19 @@ init();
  */
 document.querySelector('.btn-roll').addEventListener('click', function() {
     if (isGamePlaying) {
-        // 1) Random number
-        let dice = Math.floor(Math.random() * 6) + 1;
-
-        // 2) Check/update round score
-        if (dice === 1) {
-            nextPlayer()
-        }
-        else {
-            // Add score
-            roundScore += dice;
-            document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        }
-
-        // 2.9) Get dice dom
+        // 0.9) Get dice dom
         let diceDOM = document.querySelector('.dice');
 
-        // 3) Do animation.. the anticipation is building!
-        let r = 15 // Animation rate
+        // 1) Do animation.. the anticipation is building!
         document.querySelector('.btn-roll').disabled = true
-        diceDOM.style.transform = 'translateX(-50%) rotate(-360deg)'
+        let frames = 60
         animate(
             function* generator() {
-                for (let a = 0; a <= 360; a += r) {
-                    diceDOM.style.transform = 'translateX(-50%) rotate(-' + (360 - a) + 'deg)'
+                let dt = 1/frames
+                for (let a = 0; a < 1; a += dt) {
+                    let ap = a*(2 - a)
+                    let d = 360*(ap - 1);
+                    diceDOM.style.transform = `translateX(-50%) rotate(${d}deg)`
                     yield;
                 }
             }, 
@@ -59,7 +48,20 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
                 // Reenable button
                 document.querySelector('.btn-roll').disabled = false
 
-                // 4) Display the result
+                // 1) Random number
+                let dice = Math.floor(Math.random() * 6) + 1;
+
+                // 2) Check/update round score
+                if (dice === 1) {
+                    nextPlayer()
+                }
+                else {
+                    // Add score
+                    roundScore += dice;
+                    document.querySelector('#current-' + activePlayer).textContent = roundScore;
+                }
+
+                // 3) Display the result
                 diceDOM.style.display = 'block';
                 diceDOM.src = 'assets/dice-' + dice + '.png';
             }
