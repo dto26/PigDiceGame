@@ -1,24 +1,8 @@
-/*
-GAME RULES:
-
-- The game has 2 players, playing in rounds
-- In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score
-- BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn
-- The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn
-- The first player to reach 100 points on GLOBAL score wins the game
-
-*/
-
 // Variables controlling state of game
 let scores,
   roundScore,
   activePlayer,
   isGamePlaying;
-
-// Css classes maybe?
-const btnNew = '.btn-new';
-const btnRoll = '.btn-roll';
-const btnHold = '.btn-hold';
 
 // Initialize app
 init();
@@ -31,7 +15,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         // 0.9) Get dice dom
         let diceDOM = document.querySelector('.dice');
 
-        // 0.99) Disable button 
+        // 0.99) Disable button
         document.querySelector('.btn-roll').disabled = true
         document.querySelector('.btn-roll').classList.toggle('neumorphic--pressed', true)
 
@@ -46,7 +30,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
                     diceDOM.style.transform = `translateX(-50%) rotate(${d}deg)`
                     yield;
                 }
-            }, 
+            },
             function callback() {
                 // 1) Random number
                 let dice = Math.floor(Math.random() * 6) + 1;
@@ -97,7 +81,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 })
 
 /**
- * Control initialization
+ * Control new game
  */
 document.querySelector('.btn-new').addEventListener('click', init);
 
@@ -154,13 +138,10 @@ function nextPlayer() {
     // document.querySelector('.dice').style.display = 'none';
 }
 
-/**
- * What the heck is this malarkey
- * 
- *        v v v v v
- */
 
-// neumorphic
+/**
+ *  Neumorphic button control
+ */
 document.querySelector('.btn-new').addEventListener('click', function () {
   document.querySelector('.btn-new').classList.toggle('neumorphic--pressed')
   setTimeout(function () {
