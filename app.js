@@ -108,7 +108,7 @@ function init() {
     isGamePlaying = true;
 
     // Set dice
-    document.querySelector('.dice').style.display = 'none';
+    // document.querySelector('.dice').style.display = 'none';
 
     // Set scores
     document.getElementById('score-0').textContent = '0';
@@ -147,7 +147,7 @@ function nextPlayer() {
     document.querySelector('.player-1-panel').classList.toggle('active');
 
     // Reset dice
-    document.querySelector('.dice').style.display = 'none';
+    // document.querySelector('.dice').style.display = 'none';
 }
 
 /**
