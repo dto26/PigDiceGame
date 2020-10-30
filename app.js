@@ -31,8 +31,11 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         // 0.9) Get dice dom
         let diceDOM = document.querySelector('.dice');
 
-        // 1) Do animation.. the anticipation is building!
+        // 0.99) Disable button 
         document.querySelector('.btn-roll').disabled = true
+        document.querySelector('.btn-roll').classList.toggle('neumorphic--pressed', true)
+
+        // 1) Do animation.. the anticipation is building!
         let frames = 60
         animate(
             function* generator() {
@@ -45,9 +48,6 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
                 }
             }, 
             function callback() {
-                // Reenable button
-                document.querySelector('.btn-roll').disabled = false
-
                 // 1) Random number
                 let dice = Math.floor(Math.random() * 6) + 1;
 
@@ -64,6 +64,10 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
                 // 3) Display the result
                 diceDOM.style.display = 'block';
                 diceDOM.src = 'assets/dice-' + dice + '.png';
+
+                // 3.01) Reenable button
+                document.querySelector('.btn-roll').disabled = false
+                document.querySelector('.btn-roll').classList.toggle('neumorphic--pressed', false)
             }
         )
     }
@@ -163,12 +167,12 @@ document.querySelector('.btn-new').addEventListener('click', function () {
     document.querySelector('.btn-new').classList.toggle('neumorphic--pressed')
   }, 200);
 });
-document.querySelector('.btn-roll').addEventListener('click', function () {
-  document.querySelector('.btn-roll').classList.toggle('neumorphic--pressed')
-  setTimeout(function () {
-    document.querySelector('.btn-roll').classList.toggle('neumorphic--pressed')
-  }, 200);
-});
+// document.querySelector('.btn-roll').addEventListener('click', function () {
+//   document.querySelector('.btn-roll').classList.toggle('neumorphic--pressed')
+//   setTimeout(function () {
+//     document.querySelector('.btn-roll').classList.toggle('neumorphic--pressed')
+//   }, 200);
+// });
 document.querySelector('.btn-hold').addEventListener('click', function () {
   document.querySelector('.btn-hold').classList.toggle('neumorphic--pressed')
   setTimeout(function () {
